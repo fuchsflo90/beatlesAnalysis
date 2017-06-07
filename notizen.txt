@@ -1,0 +1,24 @@
+
+Fragen Burghardt:
+Möglichkeit, an kostenpflichtige Artikel zu kommen?
+Fokus auf die Komplexitätsentwicklung oder auf das entwickelte System mit Komplexitätsentwicklung als Evaluation?
+
+
+
+Bib Regensburg:
+
+The analysis and cognition of melodic complexity : the implication-realization model
+
+The expectancy-based model of melodic complexity:
+
+	tonal			tonal stability: Krumhansl & Kessler, 1982, 
+				metrical position: Lerdahl & Jackendoff, 1983, Palmer & Krumhansl, 1990; Thompson, 1994
+				duration:  Castellano, Bharucha & Krumhansl, 1984; Monahan & Carterette, 1985
+	intervallic		Narmour's (1990), Krumhansl (1995)
+	rhythmic		Clarke, 1985; Povel & Essens, 1985; Conley, 1981
+
+eerola 2000: Measuring melodic complexity: An expectancy-based model (zur veröffentlichung eingereicht)
+
+3 Modelle werden getestet:
+	expectancy-based model
+	implication-realization model
