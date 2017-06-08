@@ -1,6 +1,7 @@
 
 Fragen Burghardt:
 
+Arbeit von MusicXML-Analyzer einsehbar? // https://github.com/freakimkaefig/Music-XML-Analyzer
 Möglichkeit, an kostenpflichtige Artikel zu kommen?
 Fokus auf die Komplexitätsentwicklung oder auf das entwickelte System mit Komplexitätsentwicklung als Evaluation?
 
