@@ -1,0 +1,65 @@
+###### 1 Einleitung
+
+Beatles Auflösung 47 Jahre her (Quelle TODO), trotzdem nach wie vor präsent. Beispiele Touring Years Film 2016, Neuauflage wegen Jubiläum des St. Peppers Lonely Hearts Club Band Albums 2017.
+
+####### 2 Related Work
+
+##### 2.1 Musikanalyse in den Digital Humanities
+
+Beispiele MusicXML-Analyzer, Songtextanalysen und Statistische Musikanalysen
+
+##### 2.2 „Komplexität“ in der Musik
+
+Der Begriff
+
+(williams 2004) definiert verschiedene faktoren für die komplexität von musik (rythmisch, tonal)
+
+rythmischer einfluss immer groß auf die komplexität, bei tonal kommt es darauf an, wie erfahren der hörer ist
+
+Komplexität zunächst Subjektiv.
+
+The researcher found the root, third, and fifth of a key were perceived as the most consonant to the listener (Williams 2005) nach (Bharucha 1994, S. 222 expectation and tonal hierarchies).
+“tonal hierarchy” (krumhansl 1979, 1990, krumhansl & shepard 1979 S. 581).
+
+Diverse Modelle für Komplexitätsanalyse bestehen (3?).
+
+#### 2.2.1 Tonal
+
+#### 2.2.2 Rhythmus
+
+#### 2.2.3 Akkordfolge
+
+Analyse der Rolling Stones Magazine best of liste auf häufige Akkordfolgen -> Folgen die nicht in diese Muster fallen als Komplex ansehen (Declercq 2011)
+
+#### 2.2.4 Intervall(?)
+
+--------------------------------------
+###### 2.3 Erwartungsbasiertes Modell
+
+Beruht auf den drei Merkmalen:
+	Tonal
+	Intervall
+	Rythmus
+--------------------------------------
+	
+###### 3 Umsetzung
+
+##### 3.1 Korpus-Generierung
+
+##### 3.2 Definition von Metriken
+
+wissenschaftliche hintergründe beschrieben in kapitel 2.2
+in dieser arbeit liegt der fokus auf den quantitativ mit musicxml erfassbaren informationen
+
+##### 3.3 Implementierung des Modells
+
+basex beschreiben
+java application
+
+##### 3.4 Informationsvisualisierung
+
+###### 4 Analyseergebnisse
+
+###### 5 Interpretation
+
+###### 6 Ausblick

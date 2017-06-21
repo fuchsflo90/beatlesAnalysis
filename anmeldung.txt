@@ -1,0 +1,36 @@
+#### Thema
+
+Computergestützte Analyse der Komplexitätsentwicklung im musikalischen Werk der Beatles von 1962 bis 1970 auf Basis eines MusicXML-Korpus
+
+#### Hintergrund
+
+Die Digital Humanities nutzen computergestützte Methoden, um geisteswissenschaftliche Thematiken zu untersuchen. Hierzu gehören unter anderem die Musikwissenschaften. Als prägende Gruppe der 1960er-Jahre waren die Beatles im Laufe der letzten Jahrzehnte Gegenstand einiger wissenschaftlicher Arbeiten. Mason (2012) untersuchte beispielsweise, ob die Lieder der Beatles mit Hilfe von statistischer Untersuchungen in R einem bestimmten strukturellen "Genom" zugeordnet werden können. Hierzu wurde ein Korpus populärer Beatles-Lieder analysiert und herausgefunden, dass diese sich hinsichtliche von Akkorden und Melodie-Rythmik in klare Muster einteilen lassen. Eerola et al. (2000) hat mit Hilfe eines MIDI-Korpus unter anderem den Zusammenhang zwischen Chart-Platzierung und Komplexität der Beatles-Lieder untersucht. Es wurde herausgefunden, dass eine höhere Chart Platzierung mit einer geringen Lied-Komplexität einher geht. Das verwendete Korpus beschränkt sich jedoch lediglich auf die Melodieführung der Lieder. Um die Komplexitätsempfindung eines Liedes anhand verschiedener Faktoren festzustellen wurden diverse Studien durchgeführt, unter anderem von Krumhansl & Shepard (1979).
+
+#### Zielsetzung der Arbeit
+
+Im Rahmen des Digital-Humanities-Kurses wurde 2015 an der Universität Regensburg ein Analysewerkzeug unter anderem für die computergestützte Identifikation von Melodie-Pattern in MusicXML Dateien erstellt (Burghardt et al., 2015).
+Im Rahmen der Masterarbeit wird dieser Gedanke der quantitativen Musikanalyse mit Hilfe eines MusicXML-Korpus aufgegriffen. Dieses soll mit dem Programm GuitarPro aus den Dateien der Plattform ultimate-guitar.com aufgebaut werden.
+Ziel ist es, aus verwandter Literatur Metriken abzuleiten, mit Hilfe derer die quantitative Komplexität eines Liedes anhand der MusicXML-Darstellung erfasst und visualisiert werden kann. Darauf aufbauend soll die Komplexitäts-Entwicklung der Beatles-Lieder zwischen 1962 und 1970 untersucht und mit den Ergebnissen verwandter Arbeiten gegenübergestellt werden.
+
+#### Konkrete Aufgaben
+
+Aufarbeitung verwandter wissenschaftlicher Arbeiten
+Ableitung von Metriken für die Untersuchung quantitativer Komplexität aus der Literatur
+Händische Erstellung eines MusicXML Korpus der Beatles Diskographie.
+Implementierung eines Analysetools für die Untersuchung des Korpus anhand der gefundenen Metriken und anschließende Visualisierung der Analyseergebnisse.
+Interpretation der Ergebnisse hinsichtlich einer Komplexitäts-Entwicklung über die 1960er-Jahre.
+Evaluation des Analyseverfahrens anhand einer Gegenüberstellung der Ergebnisse mit verwandten wissenschaftlichen Arbeiten.
+
+#### Erwartete Vokenntnisse
+
+keine
+
+#### Weiterführende Quellen
+
+Burghardt, M., Lamm, L., Lechler, D., Schneider, M., & Semmelmann, T. (2015). MusicXML Analyzer. Ein Analysewerkzeug für die computergestützte Identifikation von Melodie-Patterns. In Proceedings des 9. Hildesheimer Evaluierungs- und Retrievalworkshops (HiER) (pp. 29–42)
+
+Eerola, T., North, A. C., & Le, L. (2000). Expectancy-Based Model of Melodic Complexity. Proceedings of the Sixth International Conference on Music Perception and Cognition, (January), 1–7.
+
+Krumhansl, C. L., & Shepard, R. N. (1979). Quantification of the hierarchy of tonal functions within a diatonic context. Journal of Experimental Psychology. Human Perception and Performance, 5(4), 579–594. https://doi.org/10.1037/0096-1523.5.4.579
+
+Mason, D. (2012). The Beatles Genome Project : Cluster Analysis of Popular Music in R. Book of Contributed Abstracts. The R User Conference, useR! 2013, (2010), 2012. Retrieved from http://www.edii.uclm.es/~useR-2013/docs/useR2013_abstract_booklet.pdf
