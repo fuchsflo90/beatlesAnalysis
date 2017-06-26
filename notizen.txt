@@ -1,15 +1,17 @@
-suche mendeley:
-quantitative complexity music
-
+TODO:
 Fragen Burghardt:
 
-Möglichkeit, an kostenpflichtige Artikel zu kommen?
+##### Bib BŸcher ausleihen:
+Geschichte Beatles
+Diskographie Beatles
+Siehe unten im Uni-Wlan checken
 
 prŸfungsamt erst wenn wiki eintrag steht
-bšhm email
+
+##### Fragen Burghardt:
 
 
-Bib Regensburg:
+##### Bib Regensburg:
 
 The analysis and cognition of melodic complexity : the implication-realization model
 
@@ -22,7 +24,3 @@ The expectancy-based model of melodic complexity:
 	rhythmic		Clarke, 1985; Povel & Essens, 1985; Conley, 1981
 
 eerola 2000: Measuring melodic complexity: An expectancy-based model (zur veröffentlichung eingereicht)
-
-3 Modelle werden getestet:
-	expectancy-based model
-	implication-realization model
