@@ -5,7 +5,7 @@ import keyDetector
 import toneArrayGenerator
 
 # select the folder to use
-foldername = "Test"
+foldername = "01_Please Please Me"
 
 songs = []
 titleList = []

@@ -1,4 +1,7 @@
 from operator import itemgetter
+# defines how precise the calculantion is, a value of 2 means, the key will be defined
+# although there are 2 differences in the compared vectors
+PRECICION = 2
 
 # keys are represented by there position from the key cmajor/aminor
 # notes that belong to the specific key are represented by 1
@@ -50,8 +53,9 @@ def find_key (vector, longest_tone):
 		current_key = (major, major_differences)
 	elif(return_lower_value(major_differences, minor_differences) == 2):
 		current_key = (minor, minor_differences)
+
 	## setting the precicion for the calculation...
-	if(current_key[1] <= 1):
+	if(current_key[1] <= PRECICION):
 		print("the key seems to be: " + current_key[0] + ", calculated differences: " + str(current_key[1]))
 	else:
 		print("longest note -(" + longest_tone + ")- seems not to be the key note!")
