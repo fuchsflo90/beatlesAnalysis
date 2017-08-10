@@ -3,9 +3,11 @@ from xml.etree import ElementTree
 from operator import itemgetter
 import keyDetector
 import toneArrayGenerator
+import csvHandler
 
 # select the folder to use
 foldername = "01_Please Please Me"
+#foldername = "Test"
 
 songs = []
 titleList = []
@@ -69,5 +71,7 @@ for i, song in enumerate(songs):
 	bkey = keyDetector.find_key(bkey_vector, btone_array_short[0][0])
 	print("############# DER VECTOR WURDE FOLGENDER TONART ZUGEORDNET: " + bkey + "!!!")
 	print("")
+	csvHandler.writeCSV([titleList[i], key, bkey, baseline_partid])
 
+csvHandler.close()
 
