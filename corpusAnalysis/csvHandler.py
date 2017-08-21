@@ -5,9 +5,12 @@ writer = open('output.csv','w')
 def close():
 	writer.close()
 
-def writeCSV(arr):
+def writeCSV(folder, arr):
 
-	for element in arr:
-		writer.write(element + ", ")
+	for i, element in enumerate(arr):
+		if i == (len(arr)-1):
+			writer.write(element)
+		else:
+			writer.write(element + ", ")
 
 	writer.write("\n")

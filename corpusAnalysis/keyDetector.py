@@ -1,7 +1,8 @@
 from operator import itemgetter
+import toneArrayGenerator
 # defines how precise the calculantion is, a value of 2 means, the key will be defined
 # although there are 2 differences in the compared vectors
-PRECICION = 2
+PRECISION = 2
 
 # keys are represented by there position from the key cmajor/aminor
 # notes that belong to the specific key are represented by 1
@@ -16,6 +17,15 @@ e = 	[0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1]
 b = 	[0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1]
 fis = 	[0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1]
 cis = 	[1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0]
+## pentatonic scales
+# c = 	[1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0]
+# g = 	[0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1]
+# d = 	[0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1]
+# a = 	[0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1]
+# e = 	[0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1]
+# b = 	[0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1]
+# fis = 	[0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0]
+# cis = 	[0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0]
 
 # b-keys
 #		[c  c# d  d# e  f  f# g  g# a  a# b]
@@ -26,12 +36,26 @@ ab = 	[1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0]
 db = 	[1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0]
 gb = 	[0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1]
 cb = 	[0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1]
+## pentatonic scales
+# f = 	[1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0]
+# bb = 	[1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0]
+# eb = 	[1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0]
+# ab = 	[1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0]
+# db = 	[0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0]
+# gb = 	[0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0]
+# cb = 	[0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1]
 
 ## dictionary that stores all the key arrays
 key_vector_list = dict({"C":c, "C#": cis, "D": d, "D#": eb, "E": e, "F": f, "F#": fis, "G": g, "G#": ab, "A": a, "A#": bb, "B": b})
 ## tone array that helps shifting the specific steps
 tone_array = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 differences_arr = []
+
+def get_key(vector, longest_tone, fifths):
+	if (fifths[0][0]) != "0":
+		return get_key_by_fifths(fifths[0][0])
+	else:
+		return find_key(vector, longest_tone)
 
 def find_key (vector, longest_tone):
 
@@ -47,15 +71,15 @@ def find_key (vector, longest_tone):
 	major_differences = get_vector_differences(vector, key_vector_list[major])
 	minor_differences = get_vector_differences(vector, key_vector_list[minor])
 
-	if(return_lower_value(major_differences, major_differences) == 0):
+	if(return_lower_value(major_differences, minor_differences) == 0):
 		current_key = (major, major_differences)
-	elif(return_lower_value(major_differences, major_differences) == 1):
+	elif(return_lower_value(major_differences, minor_differences) == 1):
 		current_key = (major, major_differences)
 	elif(return_lower_value(major_differences, minor_differences) == 2):
 		current_key = (minor, minor_differences)
 
 	## setting the precicion for the calculation...
-	if(current_key[1] <= PRECICION):
+	if(current_key[1] <= PRECISION):
 		print("the key seems to be: " + current_key[0] + ", calculated differences: " + str(current_key[1]))
 	else:
 		print("longest note -(" + longest_tone + ")- seems not to be the key note!")
@@ -80,6 +104,52 @@ def get_vector_differences (vector1, vector2):
 			if (v + vector2[i]) == 1:
 				calculated_differences += 1
 		return calculated_differences
+
+def find_fifths_in_song (song):
+
+	fifths_list = dict({"0":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0 "-1":0, "-2":0, "-3":0, "-4":0, "-5":0, "-6":0, "-7":0})
+
+	fifths = song.findall(".//fifths")
+
+	for f in fifths:
+		fifths_list[f.text] += 1
+
+	fifths_array = toneArrayGenerator.convert_dict_to_array(fifths_list)
+	sorted_fifths_array = sorted(fifths_array, key=itemgetter(1), reverse=True)
+
+	return sorted_fifths_array
+
+def get_key_by_fifths (f):
+	if f == "0":
+		return "C"
+	elif f == "1":
+		return "G"
+	elif f == "2":
+		return "D"
+	elif f == "3":
+		return "A"
+	elif f == "4":
+		return "E"
+	elif f == "5":
+		return "B"
+	elif f == "6":
+		return "F#"
+	elif f == "7":
+		return "C#"
+	elif f == "-1":
+		return "F"
+	elif f == "-2":
+		return "A#"
+	elif f == "-3":
+		return "D#"
+	elif f == "-4":
+		return "G#"
+	elif f == "-5":
+		return "C#"
+	elif f == "-6":
+		return "F#"
+	elif f == "-7":
+		return "B"
 
 # shows which of two values is the higher one, if they are equal return 0
 def return_lower_value (v1, v2):
