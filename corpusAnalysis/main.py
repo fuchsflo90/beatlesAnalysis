@@ -1,4 +1,5 @@
 import os
+import sys
 from xml.etree import ElementTree
 from operator import itemgetter
 import keyDetector
@@ -6,8 +7,8 @@ import toneArrayGenerator
 import csvHandler
 
 # select the folder to use
-foldername = "11_Yellow Submarine"
-#foldername = "Test"
+#foldername = "11_Yellow Submarine"
+foldername = sys.argv[1]
 
 songs = []
 titleList = []
@@ -35,17 +36,6 @@ def init_baseline_partid(song):
 
 for i, song in enumerate(songs):
 
-	#type_list = dict({"whole":0, "half":0, "quarter":0, "eighth":0, "16th":0, "32nd":0, "64th":0})
-	#all_type_list = dict({"whole":0, "half":0, "quarter":0, "eighth":0, "16th":0, "32nd":0, "64th":0})
-
-	# stores the partnumber of the baseline
-	#baseline_partnumber = ""
-	#baseline_partnumber = get_baseline_partnumber(song)
-
-	#notes = song.findall(".//part[@id='" + baseline_partnumber + "']/measure/note[pitch]")
-	#notes = song.findall(".//note[pitch]")
-	#all_types = song.findall('.//type')
-
 	fifths_in_song = (keyDetector.find_fifths_in_song(song))
 
 	baseline_partid = init_baseline_partid(song)
@@ -63,25 +53,14 @@ for i, song in enumerate(songs):
 	#print("####### DOT COUNT ####### ----- " + str(dot_count))
 	key_vector = keyDetector.build_tone_vector(tone_array_short)
 	key = keyDetector.get_key(key_vector, tone_array_short[0][0], fifths_in_song)
-	# if (fifths_in_song[0][0]) != "0":
-	# 	key = keyDetector.get_key_by_fifths(fifths_in_song[0][0])
-	# else:
-	# 	key = keyDetector.find_key(key_vector, tone_array_short[0][0])
+	
 
 	print("############# DER VECTOR WURDE FOLGENDER TONART ZUGEORDNET: " + key + "!!!")
 	print("##Folgende Vorzeichen wurden gefunden: " + str(fifths_in_song[0:4]))
-	#print("------------------------------------------")
-	#print("ONLY WORK WITH BASELINE!!!")
+	
 	print("#### Baseline befindet sich unter Part: " + baseline_partid)
-	# btone_array_extended = toneArrayGenerator.generate_tone_array(base_part)
-	# btone_array_short = btone_array_extended[1:8]
-	# #btone_array_short = btone_array_extended[1:6]
-	# print(str(btone_array_short))
-	# bkey_vector = keyDetector.build_tone_vector(btone_array_short)
-	# bkey = keyDetector.find_key(bkey_vector, btone_array_short[0][0])
-	# print("############# DER VECTOR WURDE FOLGENDER TONART ZUGEORDNET: " + bkey + "!!!")
 	print("")
+
 	csvHandler.writeCSV(foldername, [titleList[i], key, baseline_partid, tone_array_short[0][0], fifths_in_song[0][0]])
 
 csvHandler.close()
-
