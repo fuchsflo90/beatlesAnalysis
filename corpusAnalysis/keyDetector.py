@@ -2,6 +2,7 @@ from operator import itemgetter
 import toneArrayGenerator
 # defines how precise the calculantion is, a value of 2 means, the key will be defined
 # although there are 2 differences in the compared vectors
+# a precision value of 2 seemed to give the best results in a short evaluation
 PRECISION = 2
 
 # keys are represented by there position from the key cmajor/aminor

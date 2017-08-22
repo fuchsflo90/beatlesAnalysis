@@ -5,6 +5,7 @@ from operator import itemgetter
 import keyDetector
 import toneArrayGenerator
 import csvHandler
+import partExtractor
 
 # select the folder to use
 #foldername = "11_Yellow Submarine"
@@ -23,22 +24,11 @@ for root, dirs, files in os.walk('../corpus/MusicXML/' + foldername):
             	print("___Parsing file: " + os.path.basename(file))
             	titleList.append(os.path.basename(file))
 
-def init_baseline_partid(song):
-	part_id = ""
-	parts = song.findall(".//part")
-
-	for i, part in enumerate(parts):
-		staff_lines = part.find('measure/attributes/staff-details/staff-lines')
-		if staff_lines != None and staff_lines.text == '4':
-			part_id = part.attrib['id']
-
-	return part_id
-
 for i, song in enumerate(songs):
 
 	fifths_in_song = (keyDetector.find_fifths_in_song(song))
 
-	baseline_partid = init_baseline_partid(song)
+	baseline_partid = partExtractor.init_baseline_partid(song)
 	base_part = song.find("part[@id='" + baseline_partid + "']")
 
 	tone_array_extended = toneArrayGenerator.generate_tone_array(song)
