@@ -7,9 +7,9 @@ import toneArrayGenerator
 import csvHandler
 import partExtractor
 import chordExtractor
+import music21
 
-# select the folder to use
-#foldername = "11_Yellow Submarine"
+# select the folder to use with command line
 foldername = sys.argv[1]
 
 songs = []
@@ -46,11 +46,12 @@ for i, song in enumerate(songs):
 	key = keyDetector.get_key(key_vector, tone_array_short[0][0], fifths_in_song)
 	
 
-	#print("############# DER VECTOR WURDE FOLGENDER TONART ZUGEORDNET: " + key + "!!!")
+	print("Der Song wurde folgender Tonart zugeordnet: " + key + "!!!")
 	#print("##Folgende Vorzeichen wurden gefunden: " + str(fifths_in_song[0:4]))
 	
 	#print("#### Baseline befindet sich unter Part: " + baseline_partid)
-	print(str(chordExtractor.extract_chord_list(song)))
+
+	print(str(chordExtractor.extract_chord_list(partExtractor.get_song_without_baseline_and_percussion(song))))
 	print("")
 
 	#csvHandler.writeCSV(foldername, [titleList[i], key, baseline_partid, tone_array_short[0][0], fifths_in_song[0][0]])
