@@ -153,6 +153,8 @@ def find_first_value_in_array(arr):
 
 #does pattern matching over given chord with pitch and technical information
 # and returns the specific chord name
+
+# outsourced to the music21 package!
 def interpret_chord(chord):
 
 	hand_pattern = [None, None, None, None, None, None]

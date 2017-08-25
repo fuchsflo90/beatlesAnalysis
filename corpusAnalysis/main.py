@@ -51,7 +51,7 @@ for i, song in enumerate(songs):
 	
 	#print("#### Baseline befindet sich unter Part: " + baseline_partid)
 
-	print(str(chordExtractor.extract_chord_list(partExtractor.get_song_without_baseline_and_percussion(song))))
+	#print(str(chordExtractor.extract_chord_list(partExtractor.get_song_without_baseline_and_percussion(song))))
 	print("")
 
 	#csvHandler.writeCSV(foldername, [titleList[i], key, baseline_partid, tone_array_short[0][0], fifths_in_song[0][0]])
