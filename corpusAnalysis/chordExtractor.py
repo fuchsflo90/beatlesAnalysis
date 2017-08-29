@@ -2,6 +2,7 @@ import toneArrayGenerator
 from collections import defaultdict
 from xml.dom import minidom
 from xml.etree import ElementTree
+from operator import itemgetter
 import music21
 
 
@@ -11,12 +12,14 @@ def extract_chord_list(part):
 
 	chord_sequence = extract_chord_sequence(part)
 	for cs in chord_sequence:
-		if chord_list.get(cs) is None:
-			chord_list[cs] = 1
+		if chord_list.get(cs[1]) is None:
+			chord_list[cs[1]] = cs[0]
 		else: 
-			chord_list[cs] += 1
+			chord_list[cs[1]] += cs[0]
 
-	return chord_list
+	chord_list = toneArrayGenerator.convert_dict_to_array(chord_list)
+	sorted_chord_list = sorted(chord_list, key=itemgetter(1), reverse=True)
+	return sorted_chord_list
 
 def extract_chord_sequence(part):
 
@@ -28,7 +31,7 @@ def extract_chord_sequence(part):
 	chord_transcripts = filter(None ,chord_transcripts)
 
 	for i, ct in enumerate(chord_transcripts):
-		chord_sequence.append(interpret_chord(ct))
+		chord_sequence.append((ct[0],interpret_chord(ct[1])))
 
 	return chord_sequence
 
@@ -116,7 +119,17 @@ def create_one_chord(range_tuple, notes):
 		chord = []
 		i = 0
 
+		#get the position of the chord in notes
 		count = range_tuple[0]
+
+		#get the note duration of the chord
+		dot = (notes[count].find('dot') != None)
+
+		if (dot == True):
+			print("DOTTED CHORD!!!!!! " + str(notes[count].find('type').text))
+
+		duration = toneArrayGenerator.get_duration_as_value(notes[count].find('type').text, dot)
+
 		while count <= range_tuple[1]:
 			note = notes[count]
 			if note.find('unpitched') != None:
@@ -134,7 +147,8 @@ def create_one_chord(range_tuple, notes):
 		if chord == []:
 			return None
 		else:
-			return chord
+			duration_chord_tuple = (duration, chord)
+			return duration_chord_tuple
 
 #display the elementtree for debugging
 def prettify(elem):

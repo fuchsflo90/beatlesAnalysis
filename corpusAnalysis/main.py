@@ -7,6 +7,7 @@ import toneArrayGenerator
 import csvHandler
 import partExtractor
 import chordExtractor
+import tonalNormalizer
 import music21
 
 # select the folder to use with command line
@@ -27,10 +28,13 @@ for root, dirs, files in os.walk('../corpus/MusicXML/' + foldername):
 
 for i, song in enumerate(songs):
 
+
+	base_parts = []
 	fifths_in_song = (keyDetector.find_fifths_in_song(song))
 
-	baseline_partid = partExtractor.init_baseline_partid(song)
-	base_part = song.find("part[@id='" + baseline_partid + "']")
+	baseline_partids = partExtractor.init_baseline_partids(song)
+	for bpid in baseline_partids:
+		base_parts.append(song.find("part[@id='" + bpid + "']"))
 
 	tone_array_extended = toneArrayGenerator.generate_tone_array(song)
 	tone_array_short = tone_array_extended[1:8]
@@ -40,7 +44,7 @@ for i, song in enumerate(songs):
 	#print(type_list)
 	#print(tone_list)
 	#print("inklusive percussion: " + str(all_type_list))
-	print(str(tone_array_short))
+	#print(str(tone_array_short))
 	#print("####### DOT COUNT ####### ----- " + str(dot_count))
 	key_vector = keyDetector.build_tone_vector(tone_array_short)
 	key = keyDetector.get_key(key_vector, tone_array_short[0][0], fifths_in_song)
@@ -52,8 +56,14 @@ for i, song in enumerate(songs):
 	#print("#### Baseline befindet sich unter Part: " + baseline_partid)
 
 	#print(str(chordExtractor.extract_chord_list(partExtractor.get_song_without_baseline_and_percussion(song))))
+	print("TONE ARRAY EXTENDED: " + str(tone_array_extended))
+	print("")
+	#print("TONE ARRAY SHIFTED: " + str(tonalNormalizer.shift_tone_array(key, tone_array_extended[1:len(tone_array_extended)])))
+	#print("")
+	norm_tone_array = tonalNormalizer.normalize_tone_array(key, tone_array_extended[1:len(tone_array_extended)])
+	print("NORMALIZED ROMAN ARRAY !!!! " + str(norm_tone_array))
 	print("")
 
-	#csvHandler.writeCSV(foldername, [titleList[i], key, baseline_partid, tone_array_short[0][0], fifths_in_song[0][0]])
+	csvHandler.write_album_csv(titleList[i], key, norm_tone_array)
 
 csvHandler.close()
