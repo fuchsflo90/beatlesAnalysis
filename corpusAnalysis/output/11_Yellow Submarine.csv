@@ -1,5 +1,5 @@
-song_title, key, i, i#, ii, ii#, iii, iv, iv#, v, v#, vi, vi#, vii
-All Together Now.xml,D,327.25,0,66.375,0,88.5,251.625,0,137.5,0.25,147.375,78.125,25.5
-Hey Bulldog.xml,B,144.5625,6.625,77.5625,24.75,46.375,68.3125,14.125,158.1875,10.625,9.5,88.3125,1.625
-Its All Too Much.xml,G,357.6875,0,27.09375,0,163.21875,28.125,0,198.71875,0,24.0625,0,4.1875
-Only A Northern Song.xml,A,99.3125,3,74.25,0.5625,57.75,67.25,0,103.0625,7.375,64.0625,13.0625,32.25
+song_title; number_of_parts; key; i; i#; ii; ii#; iii; iv; iv#; v; v#; vi; vi#; vii; chord_i; chord_i#; chord_ii; chord_ii#; chord_iii; chord_iv; chord_iv#; chord_v; chord_v#; chord_vi; chord_vi#; chord_vii
+All Together Now.xml;5;D;327.25;0;66.375;0;88.5;251.625;0;137.5;0.25;147.375;78.125;25.5;76.0[('major', 51.25), ('7', 24.75)];0[None];0.5[('minor', 0.5)];0[None];0.25[('major', 0.25)];62.25[('major', 62.25)];0[None];29.0[('major', 25.0), ('interval class 3', 4.0)];0[None];8.25[('interval class 3', 8.25)];6.5[('major', 6.5)];0[None]
+Hey Bulldog.xml;5;B;144.5625;6.625;77.5625;24.75;46.375;68.3125;14.125;158.1875;10.625;9.5;88.3125;1.625;23.0[('7', 20.0), ('minor', 2.0), ('quartal', 1.0)];1.0[('major', 1.0)];0[None];0[None];0[None];6.0[('7', 2.0), ('minor', 2.0), ('major', 1.0), ('quartal', 1.0)];0[None];19.0[('minor', 19.0)];1.0[('major', 1.0)];0[None];3.0[('major', 2.0), ('7', 1.0)];0[None]
+Its All Too Much.xml;5;G;357.6875;0;27.09375;0;163.21875;28.125;0;198.71875;0;24.0625;0;4.1875;146.125[('major', 125.0), ('quartal', 21.125)];0[None];0[None];0[None];0[None];25.875[('major', 15.0), ('quartal', 10.875)];0[None];0[None];0[None];0[None];0[None];0[None]
+Only A Northern Song.xml;4;A;99.3125;3;74.25;0.5625;57.75;67.25;0;103.0625;7.375;64.0625;13.0625;32.25;32.3125[('major', 32.3125)];0[None];23.625[('minor', 11.5), ('quartal', 8.875), ('7', 2.5), ('minor 7', 0.75)];0[None];0[None];27.0625[('major', 22.1875), ('quartal', 4.875)];0[None];32.5[('major', 21.5), ('7', 11.0)];1.5[('aug', 1.5)];11.0[('7', 5.0), ('maj7', 3.0), ('major', 3)];4.0[('major', 4.0)];0[None]

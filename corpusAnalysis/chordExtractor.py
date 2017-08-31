@@ -5,10 +5,10 @@ from xml.etree import ElementTree
 from operator import itemgetter
 import music21
 
-
 def extract_chord_list(part):
 
 	chord_list = defaultdict(dict)
+	summed_chord_dict = defaultdict(dict)
 
 	chord_sequence = extract_chord_sequence(part)
 	for cs in chord_sequence:
@@ -19,7 +19,45 @@ def extract_chord_list(part):
 
 	chord_list = toneArrayGenerator.convert_dict_to_array(chord_list)
 	sorted_chord_list = sorted(chord_list, key=itemgetter(1), reverse=True)
-	return sorted_chord_list
+
+	summed_chord_dict = sum_chords_by_root(sorted_chord_list, summed_chord_dict)
+	summed_chord_list = toneArrayGenerator.convert_dict_to_array(summed_chord_dict)
+	#print("OHNE VALUE :   " + str(summed_chord_list))
+	summed_chord_list = add_value_to_chord_root(summed_chord_list)
+
+	return summed_chord_list
+
+def sum_chords_by_root(chords_arr, sum_chord_dict):
+
+	for chord in chords_arr:
+
+		root_split = chord[0].split('-', 1)
+		value = chord[1]
+
+		root = root_split[0]
+		tail = root_split[1]
+
+		if sum_chord_dict.get(root) is None:
+			sum_chord_dict[root] = [(tail, value)]
+		else:
+			sum_chord_dict[root].append((tail, value))
+
+	return sum_chord_dict
+
+# sum up the values of the chord appearences and add it to the root
+# return the list as a list of triples (root, value, [appearences])
+def add_value_to_chord_root(chord_list):
+	helperlist = []
+	for root in chord_list:
+		value = 0
+		appearences = root[1]
+		for a in appearences:
+			value += a[1]
+
+		helperlist.append((root[0], value, sorted(appearences, key=itemgetter(1), reverse=True)))
+		helperlist = sorted(helperlist, key=itemgetter(1), reverse=True)
+
+	return helperlist
 
 def extract_chord_sequence(part):
 
@@ -125,8 +163,8 @@ def create_one_chord(range_tuple, notes):
 		#get the note duration of the chord
 		dot = (notes[count].find('dot') != None)
 
-		if (dot == True):
-			print("DOTTED CHORD!!!!!! " + str(notes[count].find('type').text))
+		#if (dot == True):
+			#print("DOTTED CHORD!!!!!! " + str(notes[count].find('type').text))
 
 		duration = toneArrayGenerator.get_duration_as_value(notes[count].find('type').text, dot)
 
@@ -165,27 +203,42 @@ def find_first_value_in_array(arr):
 			return (len(arr)-i)
 	return "array seems to be empty: " + str(arr)
 
-#does pattern matching over given chord with pitch and technical information
-# and returns the specific chord name
-
 # outsourced to the music21 package!
 def interpret_chord(chord):
 
-	hand_pattern = [None, None, None, None, None, None]
-	normalized_hand_pattern = [None, None, None, None, None, None]
 	tone_string = ""
 
-	# safe string and fret information in the hand_pattern
 	for tone in chord:
-		#hand_pattern[(chord.get('s')-1)] = chord.get('f')
-		#print(str(chord))
+
 		tone_string += tone.get('p') + " "
 
-	# for i,  v in enumerate(hand_pattern):
-	# 	normalized_hand_pattern()
-	#print(str(chord))
 	music21chord = music21.chord.Chord(tone_string)
+	chordname = music21chord.pitchedCommonName
 
-	return music21chord.pitchedCommonName
+	#print("TONESTRING:   " + tone_string +  ", " + chordname)
+
+	chordname = filter_chord_name(chordname)
+
+	return chordname
+
+def filter_chord_name(chord_str):
+
+	#define parts of the chord name to delete from string
+	strings_to_replace = [' triad', ' interval', ' trichord' , ' chord', 'incomplete ', ' tetramirror']
+
+	new_chord_str = chord_str
+
+	for s in strings_to_replace:
+		new_chord_str = new_chord_str.replace(s, '')
+
+	#replace some words just to make the string shorter
+	new_chord_str = new_chord_str.replace('seventh', '7')
+	new_chord_str = new_chord_str.replace('diminished', 'dim')
+	new_chord_str = new_chord_str.replace('augmented', 'aug')
+	new_chord_str = new_chord_str.replace('dominant 7', 'dominant-7')
+	new_chord_str = new_chord_str.replace('dominant-', '')
+	new_chord_str = new_chord_str.replace('major-7', 'maj7')
+
+	return new_chord_str
 
 

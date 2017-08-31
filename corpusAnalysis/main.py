@@ -28,7 +28,6 @@ for root, dirs, files in os.walk('../corpus/MusicXML/' + foldername):
 
 for i, song in enumerate(songs):
 
-
 	base_parts = []
 	fifths_in_song = (keyDetector.find_fifths_in_song(song))
 
@@ -39,6 +38,7 @@ for i, song in enumerate(songs):
 	tone_array_extended = toneArrayGenerator.generate_tone_array(song)
 	tone_array_short = tone_array_extended[1:8]
 	#tone_array_short = tone_array_extended[1:6]
+	chord_array = chordExtractor.extract_chord_list(partExtractor.get_song_without_baseline_and_percussion(song))
 
 	print("____" + titleList[i] + "____")
 	#print(type_list)
@@ -48,6 +48,7 @@ for i, song in enumerate(songs):
 	#print("####### DOT COUNT ####### ----- " + str(dot_count))
 	key_vector = keyDetector.build_tone_vector(tone_array_short)
 	key = keyDetector.get_key(key_vector, tone_array_short[0][0], fifths_in_song)
+	number_of_parts = partExtractor.get_number_of_parts(song)
 	
 
 	print("Der Song wurde folgender Tonart zugeordnet: " + key + "!!!")
@@ -55,15 +56,18 @@ for i, song in enumerate(songs):
 	
 	#print("#### Baseline befindet sich unter Part: " + baseline_partid)
 
-	#print(str(chordExtractor.extract_chord_list(partExtractor.get_song_without_baseline_and_percussion(song))))
-	print("TONE ARRAY EXTENDED: " + str(tone_array_extended))
+	print(str(chord_array))
+	#print("TONE ARRAY EXTENDED: " + str(tone_array_extended))
 	print("")
 	#print("TONE ARRAY SHIFTED: " + str(tonalNormalizer.shift_tone_array(key, tone_array_extended[1:len(tone_array_extended)])))
 	#print("")
 	norm_tone_array = tonalNormalizer.normalize_tone_array(key, tone_array_extended[1:len(tone_array_extended)])
-	print("NORMALIZED ROMAN ARRAY !!!! " + str(norm_tone_array))
+	norm_chord_array = tonalNormalizer.normalize_chord_array(key, chord_array)
+
+	print("NORMALIZED:  " + str(norm_chord_array))
+	#print("NORMALIZED ROMAN ARRAY !!!! " + str(norm_tone_array))
 	print("")
 
-	csvHandler.write_album_csv(titleList[i], key, norm_tone_array)
+	csvHandler.write_album_csv(titleList[i], number_of_parts, key, norm_tone_array, norm_chord_array)
 
 csvHandler.close()
