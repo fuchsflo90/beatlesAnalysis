@@ -19,8 +19,11 @@ def writeCSV(arr):
 	writer.write("\n")
 
 def write_album_csv(song_title, number_of_parts, key, normalized_tone_array, normalized_chord_array):
+
 	# cut the file ending (.xml)
 	song_title = song_title[0:(len(song_title)-4)]
+	song_title = song_title.lower()
+	song_title = song_title.replace(' ', '_')
 
 	writer.write(song_title + ";" + str(number_of_parts) + ";" + key + ";")
 
