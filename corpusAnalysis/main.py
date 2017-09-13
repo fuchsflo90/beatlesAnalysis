@@ -8,6 +8,7 @@ import csvHandler
 import partExtractor
 import chordExtractor
 import tonalNormalizer
+import rhythmManager
 import music21
 
 # select the folder to use with command line
@@ -38,6 +39,7 @@ for i, song in enumerate(songs):
 	tone_array_extended = toneArrayGenerator.generate_tone_array(song)
 	tone_array_short = tone_array_extended[1:8]
 	#tone_array_short = tone_array_extended[1:6]
+
 	chord_array = chordExtractor.extract_chord_list(partExtractor.get_song_without_baseline_and_percussion(song))
 
 	print("____" + titleList[i] + "____")
@@ -52,15 +54,19 @@ for i, song in enumerate(songs):
 	
 
 	print("Der Song wurde folgender Tonart zugeordnet: " + key + "!!!")
+	print("fifths in song!!!!!!!!!!! " + str(fifths_in_song))
 	#print("##Folgende Vorzeichen wurden gefunden: " + str(fifths_in_song[0:4]))
 	
-	#print("#### Baseline befindet sich unter Part: " + baseline_partid)
-
-	print(str(chord_array))
+	print("#### percussion befindet sich unter Part: " + str(partExtractor.init_percussion_partids(song)))
+	metric_array = rhythmManager.init_beat(partExtractor.get_percussion_part(song)[1])
+	print(str(metric_array))
+	key_change_info = keyDetector.get_key_change_info(fifths_in_song);
+	#print(str(chord_array))
 	#print("TONE ARRAY EXTENDED: " + str(tone_array_extended))
 	print("")
 	#print("TONE ARRAY SHIFTED: " + str(tonalNormalizer.shift_tone_array(key, tone_array_extended[1:len(tone_array_extended)])))
 	#print("")
+
 	norm_tone_array = tonalNormalizer.normalize_tone_array(key, tone_array_extended[1:len(tone_array_extended)])
 	norm_chord_array = tonalNormalizer.normalize_chord_array(key, chord_array)
 
@@ -68,6 +74,6 @@ for i, song in enumerate(songs):
 	#print("NORMALIZED ROMAN ARRAY !!!! " + str(norm_tone_array))
 	print("")
 
-	csvHandler.write_album_csv(titleList[i], number_of_parts, key, norm_tone_array, norm_chord_array)
+	csvHandler.write_album_csv(titleList[i], number_of_parts, key, key_change_info, metric_array, norm_tone_array, norm_chord_array)
 
 csvHandler.close()

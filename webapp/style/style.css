@@ -1,0 +1,70 @@
+#header{
+	padding-left: 20px;
+}
+.headline_album_button:hover, #all_albums_button:hover{
+	cursor: pointer;
+	color: blue;
+}
+.headline_album_button{
+	margin: 10px;
+}
+.pie_chart_tile{
+	margin: 10px;
+}
+
+.pie_chart_tile div{
+	text-align: center;
+}
+
+/* album covers as background images */
+.single, .please_please_me, .with_the_beatles, .a_hard_days_night, .beatles_for_sale, .help, .rubber_soul, 
+	.revolver, .sgt_peppers_lonely_hearts_club_band, .magical_mystery_tour, .the_beatles, .yellow_submarine,
+	.abbey_road, .let_it_be{
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	}
+/*
+.single{
+	background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url('../images/single.jpg');
+}
+.please_please_me{
+	background-image: url('../images/please_please_me.jpg');
+}
+.with_the_beatles{
+	background-image: url('../images/with_the_beatles.jpg');
+}
+.a_hard_days_night{
+	background-image: url('../images/a_hard_days_night.jpg');
+}
+.beatles_for_sale{
+	background-image: url('../images/beatles_for_sale.jpg');
+}
+.help{
+	background-image: url('../images/help.jpg');
+}
+.rubber_soul{
+	background-image: url('../images/rubber_soul.jpg');
+}
+.revolver{
+	background-image: url('../images/revolver.jpg');
+}
+.sgt_peppers_lonely_hearts_club_band{
+	background-image: url('../images/sgt_peppers_lonely_hearts_club_band.jpg');
+}
+.magical_mystery_tour{
+	background-image: url('../images/magical_mystery_tour.jpg');
+}
+.the_beatles{
+	background-image: url('../images/the_beatles.jpg');
+}
+.yellow_submarine{
+	background-image: url('../images/yellow_submarine.jpg');
+}
+.abbey_road{
+	background-image: url('../images/abbey_road.jpg');
+}
+.let_it_be{
+	background-image: url('../images/let_it_be.jpg');
+}
+*/

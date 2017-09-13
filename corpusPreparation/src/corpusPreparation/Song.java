@@ -6,6 +6,8 @@ public class Song {
 	private String title;
 	private int number_of_parts;
 	private String key;
+	private String key_change_info;
+	private String metrics;
 	private String album;
 	private String author;
 	private String date;
@@ -57,6 +59,12 @@ public class Song {
 	}
 	public void setKey(String key){
 		this.key = key;
+	}
+	public void setKeyChangeInfo(String key_change_info){
+		this.key_change_info = key_change_info;
+	}
+	public void setMetrics(String metrics){
+		this.metrics = metrics;
 	}
 	public void setAlbum(String album){
 		this.album = album;
@@ -151,6 +159,12 @@ public class Song {
 	}
 	public String getKey(){
 		return key;
+	}
+	public String getKeyChangeInfo(){
+		return key_change_info;
+	}
+	public String getMetrics(){
+		return metrics;
 	}
 	public String getAlbum(){
 		return album;

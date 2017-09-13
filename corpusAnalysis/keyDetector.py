@@ -52,11 +52,26 @@ key_vector_list = dict({"C":c, "C#": cis, "D": d, "D#": eb, "E": e, "F": f, "F#"
 tone_array = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 differences_arr = []
 
-def get_key(vector, longest_tone, fifths):
-	if (fifths[0][0]) != "0":
-		return get_key_by_fifths(fifths[0][0])
+def get_key_change_info(fifths):
+	output = []
+	if (len(fifths) == 1):
+		output.append("None")
+		return output
 	else:
-		return find_key(vector, longest_tone)
+		for value in fifths:
+			output.append(get_key_by_fifths(value[0]))
+		# return the output array without the first key because it should be the
+		# same as the whole song got in the get_key method
+		return output[1:len(output)]
+
+def get_key(vector, longest_tone, fifths):
+	if (len(fifths) == 1):
+		if (fifths[0][0]) != "0":
+			return get_key_by_fifths(fifths[0][0])
+		else:
+			return find_key(vector, longest_tone)
+	else:
+		return get_key_by_fifths(fifths[0][0])
 
 def find_key (vector, longest_tone):
 
@@ -118,7 +133,16 @@ def find_fifths_in_song (song):
 	fifths_array = toneArrayGenerator.convert_dict_to_array(fifths_list)
 	sorted_fifths_array = sorted(fifths_array, key=itemgetter(1), reverse=True)
 
-	return sorted_fifths_array
+	cleared_sorted_fifths_array = []
+
+	for fifths in sorted_fifths_array:
+		if fifths[1] > 0:
+			cleared_sorted_fifths_array.append(fifths)
+			continue
+		else:
+			continue
+
+	return cleared_sorted_fifths_array
 
 def get_key_by_fifths (f):
 	if f == "0":
