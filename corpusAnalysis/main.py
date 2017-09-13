@@ -29,6 +29,7 @@ for root, dirs, files in os.walk('../corpus/MusicXML/' + foldername):
 
 for i, song in enumerate(songs):
 
+	key = ""
 	base_parts = []
 	fifths_in_song = (keyDetector.find_fifths_in_song(song))
 
@@ -49,7 +50,15 @@ for i, song in enumerate(songs):
 	#print(str(tone_array_short))
 	#print("####### DOT COUNT ####### ----- " + str(dot_count))
 	key_vector = keyDetector.build_tone_vector(tone_array_short)
-	key = keyDetector.get_key(key_vector, tone_array_short[0][0], fifths_in_song)
+
+	## manually correct the false keys for a few songs
+	if(titleList[i] == "For Your Blue.xml"):
+		key = "D"
+	elif(titleList[i] == "I Me Mine.xml"):
+		key = "A"
+	else:
+		key = keyDetector.get_key(key_vector, tone_array_short[0][0], fifths_in_song)
+
 	number_of_parts = partExtractor.get_number_of_parts(song)
 	
 
