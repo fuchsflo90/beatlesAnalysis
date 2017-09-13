@@ -25,6 +25,13 @@ beatles_vis.beatles_vis_controller = function(){
 			beatles_vis_model.set_active_album('all');
 			beatles_vis_model.update_chart_data();
 		});
+
+		$('#author_select').on('change', function(){
+			beatles_vis_view.clear_charts();
+			beatles_vis_model.set_active_author(this.value);
+			console.log(this.value);
+			beatles_vis_model.update_chart_data();
+		});
 	};
 
 	var build_charts = function(){

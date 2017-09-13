@@ -15,7 +15,7 @@ beatles_vis.beatles_vis_model = function(){
 	};
 
 	var filter_by_author = function(author){
-		d3.csv("data/corpus_data_v2.csv", function(data) {
+		d3.csv("data/corpus_data_v3.csv", function(data) {
 			that.filtered_data = data.filter(function(row) {
         		return row['author'] == author;
     		})
@@ -24,7 +24,7 @@ beatles_vis.beatles_vis_model = function(){
 	};
 
 	var filter_by_album = function(album){
-		d3.csv("data/corpus_data_v2.csv", function(data) {
+		d3.csv("data/corpus_data_v3.csv", function(data) {
 			that.filtered_data = data.filter(function(row) {
         		return row['album'] == album;
     		});
@@ -32,7 +32,7 @@ beatles_vis.beatles_vis_model = function(){
 	};
 
 	var get_all_data = function(){
-		d3.csv("data/corpus_data_v2.csv", function(data){
+		d3.csv("data/corpus_data_v3.csv", function(data){
 			unfiltered_data = data;
 			that.filtered_data = data;
 			$(that).trigger('data_update_complete');
@@ -60,11 +60,25 @@ beatles_vis.beatles_vis_model = function(){
 			return;
 		}
 		if (active_album === 'all'){
-			that.filtered_data = unfiltered_data.filter(function(row) {
-        		return row['author'].indexOf(active_author) >=0 ;
-    		});
-    		$(that).trigger('data_update_complete');
-    		return;
+			if(active_author == 'harrison' || active_author == 'lennon' || active_author == 'mccartney' || active_author == 'starkey'){
+				that.filtered_data = unfiltered_data.filter(function(row) {
+        			return row['author'].indexOf(active_author) >=0 ;
+    			});
+    			$(that).trigger('data_update_complete');
+    			return;
+			}else if(active_author == 'beatles'){
+				that.filtered_data = unfiltered_data.filter(function(row) {
+        			return row['author'].indexOf('harrison') >=0 || row['author'].indexOf('lennon') >=0 || row['author'].indexOf('mccartney') >=0 || row['author'].indexOf('starkey') >=0 ;
+    			});
+    			$(that).trigger('data_update_complete');
+    			return;
+			}else if(active_author == 'cover'){
+				that.filtered_data = unfiltered_data.filter(function(row) {
+        			return row['author'].indexOf('harrison') < 0 && row['author'].indexOf('lennon') < 0 && row['author'].indexOf('mccartney') < 0 && row['author'].indexOf('starkey') < 0 ;
+    			});
+    			$(that).trigger('data_update_complete');
+    			return;
+			}
     	}
     	if (active_author === 'all'){
 			that.filtered_data = unfiltered_data.filter(function(row) {
@@ -77,9 +91,25 @@ beatles_vis.beatles_vis_model = function(){
 			that.filtered_data = unfiltered_data.filter(function(row) {
         		return row['album'] == active_album;
     		});
-			that.filtered_data = that.filtered_data.filter(function(row) {
-        		return row['author'].indexOf(active_author) >=0 ;
-    		});
+			if(active_author == 'harrison' || active_author == 'lennon' || active_author == 'mccartney' || active_author == 'starkey'){
+				that.filtered_data = that.filtered_data.filter(function(row) {
+        			return row['author'].indexOf(active_author) >=0 ;
+    			});
+    			$(that).trigger('data_update_complete');
+    			return;
+			}else if(active_author == 'beatles'){
+				that.filtered_data = that.filtered_data.filter(function(row) {
+        			return row['author'].indexOf('harrison') >=0 || row['author'].indexOf('lennon') >=0 || row['author'].indexOf('mccartney') >=0 || row['author'].indexOf('starkey') >=0 ;
+    			});
+    			$(that).trigger('data_update_complete');
+    			return;
+			}else if(active_author == 'cover'){
+				that.filtered_data = that.filtered_data.filter(function(row) {
+        			return row['author'].indexOf('harrison') < 0 && row['author'].indexOf('lennon') < 0 && row['author'].indexOf('mccartney') < 0 && row['author'].indexOf('starkey') < 0 ;
+    			});
+    			$(that).trigger('data_update_complete');
+    			return;
+			}
     		$(that).trigger('data_update_complete');
     		return;
 		}
@@ -267,6 +297,14 @@ beatles_vis.beatles_vis_model = function(){
 			that.chartbar_data.push(song_column_chart);
 			that.piechart_data.push(song_column_pie);
 		});
+	};
+
+	var init_all_albums_chart_data_chords = function(){
+
+	};
+
+	var init_single_album_chart_data_chords = function(){
+
 	};
 
 	var build_piechart_data = function(){
