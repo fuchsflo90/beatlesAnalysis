@@ -9,25 +9,109 @@
 		<script type="text/javascript" src="script/d3.min.js"></script>
 		<script type="text/javascript" src="script/bootstrap.min.js"></script>
 		<script type="text/javascript" src="script/c3.min.js"></script>
+		<script type="text/javascript" src="script/d3plus.js"></script>
 	</head>
 
 	<body>
-		<div id="header" class="row">
-			<p id="all_albums_button">Alle Alben</p>
-
-			<select id="author_select">
-				<option value="all">all</option>
-				<option value="harrison">harrison</option>
-				<option value="lennon">lennon</option>
-				<option value="mccartney">mccartney</option>
-				<option value="starkey">starkey</option>
-				<option value="beatles">beatles</option>
-				<option value="cover">cover</option>
+		<nav class="navbar fixed-top navbar-light bg-light">
+  			<a class="navbar-brand" href="#" id="all_albums_button">Alle Alben</a>
+  			<span class="navbar-text">Liedautor:</span>
+  			<select id="author_select" class="navbar-text">
+				<option value="all">Alle</option>
+				<option value="harrison">Harrison</option>
+				<option value="lennon">Lennon</option>
+				<option value="mccartney">McCartney</option>
+				<option value="starkey">Starkey</option>
+				<option value="beatles">Beatles</option>
+				<option value="cover">Andere</option>
 			</select>
+		</nav>
+		<div id="header" class="row"></div>
+		<div id="album_meta_data" class="row well">
+			<div class="row">
+				<table class="table table-striped table-bordered">
+					<col width="25%">
+  					<col width="15%">
+  					<col width="15%">
+  					<col width="15%">
+  					<col width="15%">
+  					<col width="15%">
+  					<thead class="meta_table_head">
+    					<tr>
+      						<th>Album</th>
+      						<th>Lieder</th>
+      						<th>Tonartwechsel</th>
+      						<th>Taktartwechsel</th>
+      						<th>&#8709; Instrumentalspuren</th>
+      						<th>Datum</th>
+    					</tr>
+  					</thead>
+  					<tbody class="meta_table_body">
+    					<tr>
+    						<th scope="row" class="selected_album">Alle</th>
+      						<td id="song_count"></td>
+      						<td id="key_change_count"></td>
+      						<td id="metric_change_count"></td>
+      						<td id="instrumentation_count"></td>
+      						<td id="date"></td>
+    					</tr>
+  					</tbody>
+				</table>
+			</div>
 		</div>
 
-		<div id="bar_chart"></div>
+		<!-- Drum kümmern dass alle kacheln angezeigt werden und dass die diagramme passend im layout liegen -->
+		<div id="tree_map_area" class="row well">
+			<p>Treemaps</p>
+			<div id="key_map_area"></div>
+			<div id="metric_map_area"></div>
+		</div>
+		<div id="tonal_area" class="row well">
+			<p>Tonmaterial</p>
+			<div id="bar_chart"></div>
+			<div id="stacked_chart_area"></div>
+			<div id="single_album_tone_area" class="hide"></div>
+		</div>
+
+		<div id="chord_area" class="row well">
+			<p>Akkorde</p>
+			<div id="chord_chart_area"></div>
+			<div id="stacked_chart_area_chord"></div>
+			<div id="single_album_chord_area" class="hide"></div>
+			<div id="chord_treemap_area" class="hide"></div>
+		</div>
 		<div id="pie_chart_area"></div>
+		<div id="song_info_list" class="">
+			<table class="table table-striped">
+  				<thead>
+    				<tr>
+      					<th>#</th>
+      					<th>First Name</th>
+      					<th>Last Name</th>
+      					<th>Username</th>
+    				</tr>
+  				</thead>
+  				<tbody class="info_table_body">
+    				<tr>
+      					<td>Mark</td>
+      					<td>Otto</td>
+      					<td>@mdo</td>
+    				</tr>
+    				<tr>
+      					<th scope="row">2</th>
+      					<td>Jacob</td>
+      					<td>Thornton</td>
+      					<td>@fat</td>
+    				</tr>
+    				<tr>
+      					<th scope="row">3</th>
+      					<td>Larry</td>
+      					<td>the Bird</td>
+      					<td>@twitter</td>
+    				</tr>
+  				</tbody>
+			</table>
+		</div>
 	</body>
 	<script type="text/javascript" src="script/beatles_vis/beatles_vis.js"></script>
 	<script type="text/javascript" src="script/beatles_vis/beatles_vis_model.js"></script>
@@ -35,7 +119,10 @@
 	<script type="text/javascript" src="script/beatles_vis/beatles_vis_controller.js"></script>
 
 	<script type="text/javascript" src="script/diagrams/chartbar.js"></script>
+	<script type="text/javascript" src="script/diagrams/stacked_chartbar.js"></script>
+	<script type="text/javascript" src="script/diagrams/stacked_chartbar_sep.js"></script>
 	<script type="text/javascript" src="script/diagrams/piechart.js"></script>
+	<script type="text/javascript" src="script/diagrams/tree_map.js"></script>
 	<script type="text/javascript">
 		beatles_vis.init();
 	</script>

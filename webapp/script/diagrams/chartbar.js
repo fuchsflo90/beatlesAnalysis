@@ -3,19 +3,25 @@ beatles_vis.chartbar = function(){
   var that = {};
   var chart = null;
 
-  init = function(chartbar_data){
-    generate_chart_bar(chartbar_data);
+  init = function(chartbar_data, anchor){
+    generate_chart_bar(chartbar_data, anchor);
   }
 
-  var generate_chart_bar = function(chartbar_data){
-
-    console.log(chartbar_data);
+  var generate_chart_bar = function(chartbar_data, anchor){
 
     chart = c3.generate({
-      bindto: '#bar_chart',
+      bindto: anchor,
       data: {
         columns: chartbar_data,
         type: 'bar'
+      },
+      grid: {
+        x: {
+          show: true
+        },
+        y: {
+          show: true
+        }
       },
       bar: {
         width: {

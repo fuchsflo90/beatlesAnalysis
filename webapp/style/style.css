@@ -1,17 +1,43 @@
+body{
+	padding-left: 10px;
+	padding-right: 10px;
+}
 #header{
 	padding-left: 20px;
 }
-.headline_album_button:hover, #all_albums_button:hover{
-	cursor: pointer;
-	color: blue;
+#album_meta_data span{
+	margin-right: 20px;
+}
+.selected_album{
+	font-weight: bold;
+	font-size: 120%;
+}
+.meta_table_body tr td, .meta_table_head tr th, .meta_table_body tr th{
+	text-align: center;
 }
 .headline_album_button{
+	cursor: pointer;
 	margin: 10px;
+	word-break: break-all;
+	color: rgba(0, 0, 0, 0.0);
+}
+.headline_album_button.active{
+	border: 3px solid #2ca02c;
+}
+.hide{
+	display: none;
+}
+.well{
+	background-color: #fff;
 }
 .pie_chart_tile{
 	margin: 10px;
 }
-
+.headline_album_button:hover{
+	background-color: #fff;
+	background-image: url();
+	color: rgba(0, 0, 0, 0.8);
+}
 .pie_chart_tile div{
 	text-align: center;
 }
@@ -23,10 +49,11 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
+	height: 100px;
 	}
-/*
+
 .single{
-	background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url('../images/single.jpg');
+	background-image: /*linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%),*/ url('../images/single.jpg');
 }
 .please_please_me{
 	background-image: url('../images/please_please_me.jpg');
@@ -67,4 +94,3 @@
 .let_it_be{
 	background-image: url('../images/let_it_be.jpg');
 }
-*/

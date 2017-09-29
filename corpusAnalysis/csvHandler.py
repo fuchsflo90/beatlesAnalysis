@@ -5,8 +5,13 @@ import sys
 writer = open('output/' + sys.argv[1] + '.csv','w')
 writer.write("song_title; number_of_parts; key; key_change_info; metrics; i; i#; ii; ii#; iii; iv; iv#; v; v#; vi; vi#; vii; chord_i; chord_i#; chord_ii; chord_ii#; chord_iii; chord_iv; chord_iv#; chord_v; chord_v#; chord_vi; chord_vi#; chord_vii\n")
 
+
+analysis_writer = open('output/' + sys.argv[1] + '_analysis.csv','w')
+analysis_writer.write("song_title; i; i#; ii; ii#; iii; iv; iv#; v; v#; vi; vi#; vii; chord_i; chord_i#; chord_ii; chord_ii#; chord_iii; chord_iv; chord_iv#; chord_v; chord_v#; chord_vi; chord_vi#; chord_vii\n")
+
 def close():
 	writer.close()
+	analysis_writer.close()
 
 def writeCSV(arr):
 
@@ -40,3 +45,27 @@ def write_album_csv(song_title, number_of_parts, key, key_change_info, metrics, 
 			writer.write(str(cs[1]) + str(cs[2]) + ";")
 
 	writer.write("\n")
+
+def write_correlation_csv(song_title, normalized_tone_array, normalized_chord_array):
+
+	# cut the file ending (.xml)
+	song_title = song_title[0:(len(song_title)-4)]
+	song_title = song_title.lower()
+	song_title = song_title.replace(' ', '_')
+
+	analysis_writer.write(song_title + ";")
+
+	for i, step in enumerate(normalized_tone_array):
+		if i == (len(normalized_tone_array)-1):
+			analysis_writer.write(str(step[1]) + ";")
+		else:
+			analysis_writer.write(str(step[1]) + ";")
+
+	for i, cs in enumerate(normalized_chord_array):
+		if i == (len(normalized_chord_array)-1):
+			analysis_writer.write(str(cs[1]) + str(cs[2]))
+		else:
+			analysis_writer.write(str(cs[1]) + str(cs[2]) + ";")
+
+	analysis_writer.write("\n")
+
