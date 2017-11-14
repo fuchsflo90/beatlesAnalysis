@@ -21,9 +21,8 @@ beatles_vis.beatles_vis_controller = function(){
 
 	var init_button_functions = function(){
 		$('#all_albums_button').on('click', function(){
-			$('#tree_map_area').empty();
+			reset_treemap_area();
 			$('#chord_treemap_area').empty();
-			$('#tree_map_area').addClass('hide');
 			$('#chord_treemap_area').addClass('hide');
 			$('.selected_album').html('Alle');
 			$('#stacked_chart_area').fadeIn();
@@ -36,6 +35,8 @@ beatles_vis.beatles_vis_controller = function(){
 		});
 
 		$('#author_select').on('change', function(){
+			reset_treemap_area();
+			$('#chord_treemap_area').empty();
 			beatles_vis_view.clear_charts();
 			beatles_vis_model.set_active_author(this.value);
 			console.log(this.value);
@@ -50,18 +51,16 @@ beatles_vis.beatles_vis_controller = function(){
 
 			$('.headline_album_button').on('click', function(){
 				$('.selected_album').html($(this).html());
-				$('#tree_map_area').empty();
+				reset_treemap_area();
 				$('#chord_treemap_area').empty();
-				$('#tree_map_area').removeClass('hide');
 				$('#chord_treemap_area').removeClass('hide');
-				$('#tree_map_area').append("<div id='key_map_area'></div>");
-				$('#tree_map_area').append("<div id='metric_map_area'></div>");
 				$('.headline_album_button').removeClass('active');
 				$(this).addClass('active');
 				$('#stacked_chart_area').fadeOut();
 				$('#stacked_chart_area_chord').fadeOut();
 				$('#single_album_tone_area').removeClass('hide');
 				$('#single_album_chord_area').removeClass('hide');
+				$('#song_info_list').removeClass('hide');
 				beatles_vis_view.clear_charts();
 				beatles_vis_model.set_active_album($(this).html());
 				beatles_vis_model.update_chart_data();
@@ -85,6 +84,11 @@ beatles_vis.beatles_vis_controller = function(){
 			beatles_vis_view.build_piechart(i, data[0] ,[['ebene1', data[1]], ['ebene2', data[2]], ['ebene3', data[3]], ['ebene4', data[4]]]);
 		});
 		*/
+	};
+	var reset_treemap_area = function(){
+		$('#tree_map_area').empty();
+		$('#tree_map_area').append("<div id='key_map_area' class='col-md-6'></div>");
+		$('#tree_map_area').append("<div id='metric_map_area' class='col-md-6'></div>");
 	};
 
 	var init_chart_data = function(){

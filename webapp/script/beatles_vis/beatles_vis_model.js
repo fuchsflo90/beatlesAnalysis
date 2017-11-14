@@ -69,6 +69,9 @@ beatles_vis.beatles_vis_model = function(){
 		}else{
 			init_all_albums_chart_data(filtered_data);
 			init_all_albums_chart_data_chords(filtered_data);
+			/*tes TESTTESTTEST*/
+			init_tree_map_data(filtered_data);
+			init_table_data(filtered_data);
 		}
 
 		$(that).trigger('model_init_complete');
@@ -519,24 +522,21 @@ beatles_vis.beatles_vis_model = function(){
 			var key_values = [];
 			var metrics_arr = song.metrics.clean_metrics(";",2);
 			metric_map_data = add_metrics_to_object(metric_map_data, metrics_arr);
-			key_values.push(song.key);
+			clean_key = song.key.replace("#", "is");
+			key_values.push(clean_key);
 			var key_change_info = song.key_change_info.replace(/\[/g,"");
 			key_change_info = key_change_info.replace(/\]/g,"");
 			key_change_info = key_change_info.replace(/\'/g,"");
 
 
 			if(key_change_info.indexOf('None') < 0){
-				console.log("key_change_info");
-				console.log(key_change_info);
+
 				var info_array = key_change_info.replace(" ","").split(';');
-				console.log(info_array);
 				$.each(info_array, function(index, val){
-					key_values.push(val);
+					clean_val = val.replace("#", "is");
+					key_values.push(clean_val);
 				});
 			}
-
-			console.log("key values");
-			console.log(key_values);
 
 			$.each(key_values, function(index, val){
 				if(key_map_data.hasOwnProperty(val)){
@@ -545,10 +545,6 @@ beatles_vis.beatles_vis_model = function(){
 					key_map_data[val] = 1;
 				}
 			});
-			console.log("key_map_data");
-			console.log(key_map_data);
-
-
 		});
 		key_map_data = transform_object_to_tree_data(key_map_data);
 		metric_map_data = transform_object_to_tree_data(metric_map_data);
@@ -557,8 +553,6 @@ beatles_vis.beatles_vis_model = function(){
 		that.tree_map_data.metric = metric_map_data;
 		that.tree_map_data.chord = extract_chord_types(filtered_data);
 
-		console.log("map data: ");
-		console.log(that.tree_map_data);
 	};
 
 	var init_ablum_meta_data = function(filtered_data){
@@ -616,7 +610,19 @@ beatles_vis.beatles_vis_model = function(){
 	var init_table_data = function(data){
 		var new_table_data = [];
 		$.each(data, function(index, row){
-			var table_row = [row.title, row.author, row.key, row.metrics];
+			var clean_key_change_info = row.key_change_info.replace(/\'/g,"");
+			clean_key_change_info = clean_key_change_info.replace(";", ",");
+			var clean_title = row.title.replace(/\_/g," ");
+			clean_title = clean_title.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+    			return letter.toUpperCase();
+			});
+			var clean_author = row.author.replace(/\;/g,",");
+			clean_author = clean_author.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+    			return letter.toUpperCase();
+			});
+			/* handle the case of Paul McCartney, as he is the only author with double "cc" */
+			clean_author = clean_author.replace("cc", "cC");
+			var table_row = [clean_title, clean_author, row.key + " " + clean_key_change_info, row.metrics];
 			new_table_data.push(table_row);
 		});
 		that.table_data = new_table_data;

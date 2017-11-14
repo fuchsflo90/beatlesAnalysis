@@ -11,6 +11,12 @@ beatles_vis.beatles_vis_view = function(){
 		hide_elements();
 	};
 
+	var set_body_padding = function(){
+		var navbar_height = $('#fixed-top-navigation').height() / 2.0;
+		$('body,html').css('padding-top',navbar_height);
+		console.log('navbar_height: ' + navbar_height);
+	};
+
 	var build_chartbar = function(chartbar_data, anchor){
 		chartbar = beatles_vis.chartbar();
 		chartbar.init(chartbar_data, anchor);
@@ -81,6 +87,7 @@ beatles_vis.beatles_vis_view = function(){
 		$.each(album_name_list, function(i, name){
 			$('.headline_album_menu').append("<div class='headline_album_button col-md-1 "+ name +"'>" + name + "</div>");
 		});
+		set_body_padding();
 	};
 
 	var hide_elements = function(){
