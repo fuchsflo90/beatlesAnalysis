@@ -1,0 +1,16 @@
+
+ggplotRegression <- function (fit) {
+
+require(ggplot2)
+
+ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) + 
+  geom_point() +
+  stat_smooth(method = "lm", col = "red") +
+  labs(title = paste("r = ",signif(sqrt(summary(fit)$r.squared), 5),
+                     " m =",signif(fit$coef[[2]], 5),
+                     " p =",signif(summary(fit)$coef[2,4], 5)))
+}
+
+
+dev.new(width=4, height=4)
+ggplotRegression(lm(Ebene3.und.4.Anteile ~ Jahr, data = d1)) + scale_x_continuous(breaks=seq(1963,1967,1)) + scale_y_continuous(breaks=seq(0.0,0.9,0.05)) + theme(plot.title = element_text(size = rel(1)))
