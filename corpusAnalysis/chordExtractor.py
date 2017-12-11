@@ -98,36 +98,7 @@ def generate_chord_range_list(notes):
 	for i, n in enumerate(notes):
 		if n.find("chord") is None:
 			continue
-	#	elif notes[i-1].find("chord") is None:
-	#		range_start = (i-1)
-	#		continue
-	#	elif (i) == (len(notes)-1):
-	#		range_end = (i)
-#
-#			range_tuple = (range_start, range_end)
-#			chord_range_list[range_start] = range_tuple
-#
-#			return chord_range_list
-#		elif notes[i-1].find("chord") is None and notes[i+1].find("chord") is None:
-#			range_start = (i-1)
-#			range_end = i
-#			range_tuple = (range_start, range_end)
-#			chord_range_list[range_start] = range_tuple
-#
-#			range_start = 0
-#			range_end = 0
-#			continue 
-#		elif notes[i+1].find("chord") is None:
-#			range_end = (i)
-#
-#			range_tuple = (range_start, range_end)
-#			chord_range_list[range_start] = range_tuple
-#
-#			range_start = 0
-#			range_end = 0
-#			continue
-#		else:
-#			continue
+
 		else:
 			if notes[i-1].find("chord") is None:
 				range_start = (i-1)
@@ -139,15 +110,6 @@ def generate_chord_range_list(notes):
 				chord_range_list[range_start] = range_tuple
 				return chord_range_list
 
-	#		if notes[i-1].find("chord") is None and notes[i+1].find("chord") is None:
-	#			range_start = (i-1)
-	#			range_end = i
-	#			range_tuple = (range_start, range_end)
-	#			chord_range_list[range_start] = range_tuple
-#
-#				range_start = 0
-#				range_end = 0
-#				continue
 			if notes[i+1].find("chord") is None:
 				range_end = (i)
 
