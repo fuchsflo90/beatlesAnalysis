@@ -239,7 +239,6 @@ beatles_vis.beatles_vis_model = function(){
 			that.chartbar_data.push(album_column_chart);
 			that.piechart_data.push(album_column_pie);
 		});
-
 		that.stacked_chart_data = init_stacked_chart_data(that.piechart_data);
 	};
 
@@ -505,6 +504,12 @@ beatles_vis.beatles_vis_model = function(){
 	var init_stacked_chart_data = function(pie_data){
 		var output = [['ebene1'], ['ebene2'], ['ebene3'], ['ebene4']];
 		$.each(pie_data, function(index, album){
+			/**if (index == 1){
+				output[0].push(null);
+				output[1].push(null);
+				output[2].push(null);
+				output[3].push(null);
+			}**/
 			output[0].push(album[1]);
 			output[1].push(album[2]);
 			output[2].push(album[3]);
@@ -539,10 +544,11 @@ beatles_vis.beatles_vis_model = function(){
 			}
 
 			$.each(key_values, function(index, val){
-				if(key_map_data.hasOwnProperty(val)){
-					key_map_data[val] = parseInt(key_map_data[val]) + 1;
+				var extended_key = extend_key(val);
+				if(key_map_data.hasOwnProperty(extended_key)){
+					key_map_data[extended_key] = parseInt(key_map_data[extended_key]) + 1;
 				}else{
-					key_map_data[val] = 1;
+					key_map_data[extended_key] = 1;
 				}
 			});
 		});
@@ -553,6 +559,52 @@ beatles_vis.beatles_vis_model = function(){
 		that.tree_map_data.metric = metric_map_data;
 		that.tree_map_data.chord = extract_chord_types(filtered_data);
 
+	};
+
+	var extend_key = function(key){
+
+		var extended_key = "";
+
+		switch (key) {
+   			case 'C':
+      			extended_key = "C/Am";
+      			break;
+      		case 'Cis':
+      			extended_key = "Cis/Bm";
+      			break;
+      		case 'D':
+      			extended_key = "D/Hm";
+      			break;
+      		case 'Dis':
+      			extended_key = "Dis/Cm";
+      			break;
+      		case 'E':
+      			extended_key = "E/Cism";
+      			break;
+      		case 'F':
+      			extended_key = "F/Dm";
+      			break;
+      		case 'Fis':
+      			extended_key = "Fis/Dism";
+      			break;
+      		case 'G':
+      			extended_key = "G/Em";
+      			break;
+      		case 'Gis':
+      			extended_key = "Gis/Fm";
+      			break;
+      		case "A":
+      			extended_key = "A/Fism";
+      			break;
+      		case "Ais":
+      			extended_key = "B/Gm";
+      			break;
+      		case 'B':
+      			extended_key = "H/Gism"
+      			break;
+		}
+
+		return extended_key;
 	};
 
 	var init_ablum_meta_data = function(filtered_data){
@@ -568,7 +620,7 @@ beatles_vis.beatles_vis_model = function(){
 		that.album_meta_data.song_count = filtered_data.length;
 
 		if (that.active_album == 'all' || that.active_album == 'single'){
-			that.album_meta_data.date = "1963-1970"
+			that.album_meta_data.date = "1962-1970"
 		}else{
 			that.album_meta_data.date = get_date_from_value(filtered_data[0].date);
 		}
@@ -612,20 +664,46 @@ beatles_vis.beatles_vis_model = function(){
 		$.each(data, function(index, row){
 			var clean_key_change_info = row.key_change_info.replace(/\'/g,"");
 			clean_key_change_info = clean_key_change_info.replace(";", ",");
+			var clean_title = clean_title_string(row.title);
+			/**
 			var clean_title = row.title.replace(/\_/g," ");
 			clean_title = clean_title.toLowerCase().replace(/\b[a-z]/g, function(letter) {
     			return letter.toUpperCase();
 			});
+			**/
+
+			var clean_author = clean_author_string(row.author);
+			/**
 			var clean_author = row.author.replace(/\;/g,",");
+			clean_author = clean_author.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+    			return letter.toUpperCase();
+			});
+			clean_author = clean_author.replace("cc", "cC");
+			**/
+			var clean_key = row.key.replace("#", "is");
+			var extended_key = extend_key(clean_key);
+			var table_row = [clean_title, clean_author, extended_key + " " + clean_key_change_info, row.metrics];
+			new_table_data.push(table_row);
+		});
+		that.table_data = new_table_data;
+	};
+
+	var clean_title_string = function(string){
+		var clean_title = string.replace(/\_/g," ");
+			clean_title = clean_title.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+    			return letter.toUpperCase();
+			});
+		return clean_title;
+	};
+
+	var clean_author_string = function(string){
+		var clean_author = string.replace(/\;/g,",");
 			clean_author = clean_author.toLowerCase().replace(/\b[a-z]/g, function(letter) {
     			return letter.toUpperCase();
 			});
 			/* handle the case of Paul McCartney, as he is the only author with double "cc" */
 			clean_author = clean_author.replace("cc", "cC");
-			var table_row = [clean_title, clean_author, row.key + " " + clean_key_change_info, row.metrics];
-			new_table_data.push(table_row);
-		});
-		that.table_data = new_table_data;
+		return clean_author;
 	};
 
 	var get_chord_value = function(chord_string){
@@ -795,13 +873,13 @@ beatles_vis.beatles_vis_model = function(){
 
 	var add_metrics_to_object = function(object, arr){
 		$.each(arr, function(index, m){
+			m = m.replace(" ","");
 			if (object.hasOwnProperty(m)){
 				object[m] = object[m] + 1;
 			}else{
 				object[m] = 1;
 			}
 		});
-
 		return object;
 	};
 

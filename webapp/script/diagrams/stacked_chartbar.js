@@ -9,6 +9,22 @@ beatles_vis.stacked_chartbar = function(){
 
   var generate_stacked_chart_bar = function(stacked_chartbar_data, album_name_array, anchor){
 
+/**
+    var new_name_array = [];
+
+    $.each(album_name_array, function(i, value){
+      if(i == 0){
+        new_name_array.push(album_name_array[0]);
+      }else if(i == 1){
+        new_name_array.push("|");
+        new_name_array.push(album_name_array[1])
+      }else{
+        new_name_array.push(album_name_array[i]);
+      }
+    })
+
+    **/
+
     chart = c3.generate({
       bindto: anchor,
       data: {
@@ -31,10 +47,8 @@ beatles_vis.stacked_chartbar = function(){
       },
       bar: {
         width: {
-            ratio: 0.8 // this makes bar width 50% of length between ticks
+            ratio: 0.8
         }
-        // or
-        //width: 100 // this makes bar width 100px
       },
       axis: {
         x:{
