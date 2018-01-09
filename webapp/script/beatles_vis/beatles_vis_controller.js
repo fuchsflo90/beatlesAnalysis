@@ -5,6 +5,7 @@ beatles_vis.beatles_vis_controller = function(){
 	var beatles_vis_view = null;
 
 	var init = function(){
+
 		beatles_vis_model = beatles_vis.beatles_vis_model();
 		beatles_vis_view = beatles_vis.beatles_vis_view();
 
@@ -12,6 +13,7 @@ beatles_vis.beatles_vis_controller = function(){
 		init_button_functions();
 
 		beatles_vis_model.init();
+
 	};
 
 	var init_trigger = function(){
@@ -42,9 +44,19 @@ beatles_vis.beatles_vis_controller = function(){
 			console.log(this.value);
 			beatles_vis_model.update_chart_data();
 		});
+
+		$('.infolink').on('click', function(){
+			$('body>div').addClass('hide');
+			$('body>div').addClass('hide');
+			$('#info').removeClass('hide');
+		});
 	};
 
 	var build_charts = function(){
+
+		$('body>div').removeClass('hide');
+		$('.loader').addClass('hide');
+		$('#info').addClass('hide');
 
 		if(beatles_vis_model.active_album == 'all'){
 			beatles_vis_view.build_headline_album_menu(beatles_vis_model.chartbar_data);
@@ -87,6 +99,8 @@ beatles_vis.beatles_vis_controller = function(){
 	};
 	var reset_treemap_area = function(){
 		$('#tree_map_area').empty();
+		$('#tree_map_area').append("<div class='col-md-6'><h4>Tonarten</h4></div>");
+		$('#tree_map_area').append("<div class='col-md-6'><h4>Taktarten</h4></div>");
 		$('#tree_map_area').append("<div id='key_map_area' class='col-md-6'></div>");
 		$('#tree_map_area').append("<div id='metric_map_area' class='col-md-6'></div>");
 	};

@@ -13,7 +13,8 @@
 	</head>
 
 	<body>
-		<nav class="navbar navbar-fixed-top navbar-light bg-light" id="fixed-top-navigation">
+		<nav class="navbar navbar-fixed-top navbar-light bg-light" id="fixed-top-navigation" style="margin-left: 20px; margin-right: 20px">
+			<div class="row copyright"><span class="infolink">info</span> | &copy; 2018 Florian Fuchs</div>
   			<a class="navbar-brand" href="#" id="all_albums_button">Alle Alben</a>
   			<span class="navbar-text">Liedautor:</span>
   			<select id="author_select" class="navbar-text">
@@ -27,16 +28,17 @@
 			</select>
 			<div id="header" class="row"></div>
 		</nav>
+		<div class="loader hide" style="margin-top:200px"></div>
 		<!--<div id="header" class="row"></div>-->
-		<div id="album_meta_data" class="row well">
-			<div class="row">
-				<table class="table table-striped table-bordered">
+		<div id="album_meta_data" class="row well nopadding onemargin">
+			<div class="row" style="padding-left: 15px; padding-right: 15px">
+				<table class="table table-striped table-bordered" style="margin-bottom:0px;">
 					<col width="25%">
   					<col width="15%">
   					<col width="15%">
   					<col width="15%">
   					<col width="15%">
-  					<col width="15%">
+  					<!--<col width="5%">-->
   					<thead class="meta_table_head">
     					<tr>
       						<th>Album</th>
@@ -47,7 +49,7 @@
       						<th>Datum</th>
     					</tr>
   					</thead>
-  					<tbody class="meta_table_body">
+  					<tbody class="meta_table_body" style="width: 100%">
     					<tr>
     						<th scope="row" class="selected_album">Alle</th>
       						<td id="song_count"></td>
@@ -60,28 +62,29 @@
 				</table>
 			</div>
 		</div>
-
-		<div id="tree_map_area" class="row well">
+		<div id="tree_map_area" class="row well onemargin">
+			<div class="col-md-6"><h4>Tonarten</h4></div>
+			<div class="col-md-6"><h4>Taktarten</h4></div>
 			<div id="key_map_area" class="col-md-6"></div>
 			<div id="metric_map_area" class="col-md-6"></div>
 		</div>
-		<div id="tonal_area" class="row well">
-			<h2>Tonmaterial</h2>
+		<div id="tonal_area" class="row well onemargin">
+			<h4>Tonmaterial</h4>
 			<div id="bar_chart"></div>
 			<div id="stacked_chart_area"></div>
 			<div id="single_album_tone_area" class="hide"></div>
 		</div>
 
-		<div id="chord_area" class="row well">
-			<h2>Akkorde</h2>
+		<div id="chord_area" class="row well onemargin">
+			<h4>Akkorde</h4>
 			<div id="chord_chart_area"></div>
 			<div id="stacked_chart_area_chord"></div>
 			<div id="single_album_chord_area" class="hide"></div>
 			<div id="chord_treemap_area" class="hide"></div>
 		</div>
 		<div id="pie_chart_area"></div>
-		<div id="song_info_list" class="">
-			<table class="table table-striped">
+		<div id="song_info_list" class="well">
+			<table class="table table-striped" style="background-color: #fff; margin-bottom: 0px;">
   				<thead>
     				<tr>
       					<th>Titel</th>
@@ -93,6 +96,134 @@
   				<tbody class="info_table_body">
   				</tbody>
 			</table>
+		</div>
+		<div id="info" class="well hide">
+			<p>Die verwendeten Bilddateien (Albumcover) stammen von der <a href="http://www.thebeatles.com/" target="_blank">offiziellen Website der Beatles</a></p>
+			<p>Diese Seite dient als Visualisierung f&uuml;r die Ergebnisse einer Masterarbeit von Florian Fuchs mit dem Thema:</p>
+			<h2>Computergest&uuml;tzte Musikanalyse der Beatles von 1962 bis 1970 auf Basis eines MusicXML-Korpus</h2>
+			<br>
+			<p style="text-align:justify">
+				In dieser Arbeit wurde das Werk der Beatles mit Hilfe einer quantitativen Computeranalyse auf eine musikalische Entwicklung hin untersucht. Besonders wurde dabei auf den Begriff der musikalischen „Komplexit&auml;t“ eingegangen. Die Arbeit befasst sich einerseits mit objektiven Kriterien wie Metrik, Instrumentation und Tonarten. Andererseits wird das Ton- und Akkordmaterial in vier verschiedene Ebenen eingeteilt, um es gem&auml;ß subjektiver Komplexit&auml;t einzuordnen. F&uuml;r die Analyse wurde ein Korpus der Beatles-Ver&ouml;ffentlichungen zwischen 1962 und 1970 zusammengestellt. Dazu wurden Tabulaturen von der Plattform ultimate-guitar.com heruntergeladen und ins musicXML-Format exportiert. H&auml;ndisch wurden Metadaten wie der Autor zu jedem Lied zusammengetragen. F&uuml;r die Analyse relevante Informationen wurden unter Verwendung von Python aus dem Korpus extrahiert. Es konnte gezeigt werden, dass die Vielfalt der verwendeten Rhythmen im Laufe der Schaffenszeit zunahm. Außerdem weist sowohl das Ton-, als auch das Akkordmaterial w&auml;hrend der „kreativen Hochphase“ der Band ab 1967 eine h&ouml;here erwartungsbasierte Komplexit&auml;t auf, als auf den fr&uuml;hen Alben. Somit konnte bis zu dieser Zeit eine Einteilung in Schaffensphasen nachvollzogen werden, die aus einem Expertengespr&auml;ch hervorgeht. Diese Entwicklung der subjektiven Komplexit&auml;t konnte mit einer Korrelationsanalyse best&auml;tigt werden.
+			</p>
+			<p>Die verschiedenen Ebenen der erwartungs-basierten Komplexit&auml;t sind wie folgt eingeteilt. In den Tabellen werden als Beispiele die Tonarten C/Am und D/Hm angegeben. Die erwartungs-basierte Komplexit&auml;t nimmt jeweils von Ebene1 (gering) bis Ebene4 (hoch) zu.</p>
+
+			<br>
+			<h4>Ton-Ebenen</h4>
+			<table class="table infotable" style="background-color: #fff; margin-bottom: 0px;">
+  				<thead>
+    				<tr>
+    					<th>Stufe</th>
+      					<th class="blue">I</th>
+      					<th class="red">I#</th>
+      					<th class="green">II</th>
+      					<th class="red">II#</th>
+      					<th class="yellow">III</th>
+      					<th class="green">IV</th>
+      					<th class="red">IV#</th>
+      					<th class="yellow">V</th>
+      					<th class="red">V#</th>
+      					<th class="blue">VI</th>
+      					<th class="red">VI#</th>
+      					<th class="green">VII</th>
+    				</tr>
+  				</thead>
+  				<tbody>
+  					<tr>
+  						<td>C/Am</td>
+  						<td>c</td>
+  						<td>cis</td>
+  						<td>d</td>
+  						<td>dis</td>
+  						<td>e</td>
+  						<td>f</td>
+  						<td>fis</td>
+  						<td>g</td>
+  						<td>gis</td>
+  						<td>a</td>
+  						<td>b</td>
+  						<td>h</td>
+  					</tr>
+  					<tr>
+  						<td>D/Hm</td>
+  						<td>d</td>
+  						<td>dis</td>
+  						<td>e</td>
+  						<td>f</td>
+  						<td>fis</td>
+  						<td>g</td>
+  						<td>gis</td>
+  						<td>a</td>
+  						<td>b</td>
+  						<td>h</td>
+  						<td>c</td>
+  						<td>cis</td>
+  					</tr>
+  				</tbody>
+			</table>
+			<br>
+			<p><span class="layerspan blue">Ebene1</span> - Grundt&ouml;ne Dur- und parallele Moll-Tonart</p>
+			<p><span class="layerspan yellow">Ebene2</span> - restliche Tonika-eigenen T&ouml;ne</p>
+			<p><span class="layerspan green">Ebene3</span> - restliche Tonart-eigenen T&ouml;ne</p>
+			<p><span class="layerspan red">Ebene4</span> - Tonart-fremde T&ouml;ne</p>
+
+			<br>
+			<h4>Akkord-Ebenen</h4>
+			<table class="table infotable" style="background-color: #fff; margin-bottom: 0px;">
+  				<thead>
+    				<tr>
+    					<th>Stufe</th>
+      					<th class="blue">I</th>
+      					<th class="red">I#</th>
+      					<th class="green">II</th>
+      					<th class="red">II#</th>
+      					<th class="green">III</th>
+      					<th class="yellow">IV</th>
+      					<th class="red">IV#</th>
+      					<th class="yellow">V</th>
+      					<th class="red">V#</th>
+      					<th class="blue">VI</th>
+      					<th class="red">VI#</th>
+      					<th class="green">VII</th>
+    				</tr>
+  				</thead>
+  				<tbody>
+  					<tr>
+  						<td>C/Am</td>
+  						<td>C</td>
+  						<td>Cis</td>
+  						<td>D</td>
+  						<td>Dis</td>
+  						<td>E</td>
+  						<td>F</td>
+  						<td>Fis</td>
+  						<td>G</td>
+  						<td>Gis</td>
+  						<td>A</td>
+  						<td>B</td>
+  						<td>H</td>
+  					</tr>
+  					<tr>
+  						<td>D/Hm</td>
+  						<td>D</td>
+  						<td>Dis</td>
+  						<td>E</td>
+  						<td>F</td>
+  						<td>Fis</td>
+  						<td>G</td>
+  						<td>Gis</td>
+  						<td>A</td>
+  						<td>B</td>
+  						<td>H</td>
+  						<td>C</td>
+  						<td>Cis</td>
+  					</tr>
+  				</tbody>
+			</table>
+			<br>
+			<p><span class="layerspan blue">Ebene1</span> - Tonika von Dur- und paralleler Moll-Tonart</p>
+			<p><span class="layerspan yellow">Ebene2</span> - Dominante und Subdominante</p>
+			<p><span class="layerspan green">Ebene3</span> - restliche Tonart-eigene Akkorde</p>
+			<p><span class="layerspan red">Ebene4</span> - Tonart-fremde Akkorde</p>
 		</div>
 	</body>
 	<script type="text/javascript" src="script/beatles_vis/beatles_vis.js"></script>
@@ -106,6 +237,8 @@
 	<script type="text/javascript" src="script/diagrams/piechart.js"></script>
 	<script type="text/javascript" src="script/diagrams/tree_map.js"></script>
 	<script type="text/javascript">
+		$('body>div').addClass('hide');
+		$('.loader').removeClass('hide');
 		beatles_vis.init();
 	</script>
 </html>
